@@ -1,0 +1,12 @@
+/* .userTable tr{
+    @apply border text-base font-medium 
+}
+.userTable{
+    @apply bg-white
+}
+.userTable thead{
+    @apply flex gap-4
+}
+.userTable td{
+    @apply border text-base text-center
+} */
