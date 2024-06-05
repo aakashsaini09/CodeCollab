@@ -50,13 +50,6 @@ const Login = () => {
         <div className='w-full flex items-center my-10 '>
           <img className='h-20 flex mx-auto cursor-pointer' src={image} alt="" />
         </div>
-        {/* <form className='pb-8 pt-1 cursor-pointer'>
-          <label>
-
-          <div className='w-full items-center text-center'>Upload Image</div>
-          <input type="file" className='hidden'/>
-          </label>
-        </form> */}
           <form action="" className='flex gap-5 flex-col' onSubmit={handleSubmit}>
             <input autoComplete='true' className='border-2 border-black p-2' name='email' value={data.email} onChange={handleOnChange} type="text" placeholder='enter email here' />
             <input className='border-2 border-black p-2' name='password' value={data.password} onChange={handleOnChange} type="password" placeholder='Enter your password' />
