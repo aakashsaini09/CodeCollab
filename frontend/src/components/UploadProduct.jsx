@@ -11,6 +11,7 @@ const UploadProduct = ({onClose}) => {
         selling: ""
     })
   return (
+      // Code to upload product
     <div className='fixed w-full h-full bg-slate-200 bg-opacity-50 top-0 right-0 bottom-0 flex justify-center items-center'>
       <div className="bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%]">
         <div className='flex justify-between items-center'>
