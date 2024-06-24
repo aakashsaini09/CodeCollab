@@ -42,6 +42,7 @@ const Login = () => {
       }
   }
   return (
+    // login page (not completed)
     <section>
       <div className="container mx-auto p-4">
         <h1 className='w-full font-bold text-6xl text-center py-5'>Login Page</h1>
