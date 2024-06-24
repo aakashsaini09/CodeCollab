@@ -4,6 +4,7 @@ import UploadProduct from '../components/UploadProduct'
 const Allproducts = () => {
   const [openUploadProduct, setopenUploadProduct] = useState(false)
   return (
+    // all products listing
     <div>
       <div className="bg-white py-2 px-4 flex justify-between items-center">
         <h2 className='font-bold text-lg'>All Product</h2>
