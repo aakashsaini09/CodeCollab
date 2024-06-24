@@ -56,6 +56,7 @@ const Signup = () => {
         })
       }
   return (
+    // signup page
     <section>
       <div className="container mx-auto p-4">
         <h1 className='w-full font-bold text-6xl text-center py-5'>Sign Up</h1>
