@@ -15,8 +15,7 @@ async function updateUser(req, res) {
             message: "user updated",
             success: true,
             error: false
-    })
-    } catch (err) {
+    })} catch (err) {
         res.status(400).json({
             message: err.message || err,
             error: true,
