@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const userModel = require('../models/userModel')
 async function userSignUpController(req, res){
     try {
-        const { email, password, name} = req.body
+    const { email, password, name} = req.body
         const user = await userModel.findOne({email})
         if(user){
             throw new Error("User Already Exist!!")
