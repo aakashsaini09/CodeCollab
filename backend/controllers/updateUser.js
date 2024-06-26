@@ -1,5 +1,4 @@
 const userModel = require("../models/userModel")
-
 async function updateUser(req, res) {
     try {
         const sesionUser = req.userId
@@ -16,7 +15,7 @@ async function updateUser(req, res) {
             message: "user updated",
             success: true,
             error: false
-        })
+    })
     } catch (err) {
         res.status(400).json({
             message: err.message || err,
