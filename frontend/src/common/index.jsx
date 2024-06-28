@@ -4,6 +4,7 @@ const SummaryApi = {
         url: `${backendDomain}/api/signup`,
         method: "post"
     },
+    
     signIn : {
         url: `${backendDomain}/api/login`,
         method: "post"
@@ -16,11 +17,11 @@ const SummaryApi = {
         url: `${backendDomain}/api/userlogout`,
         method: "get"
     },
+    
     allUsers : {
         url: `${backendDomain}/api/all-users`,
         method: "get"
     },
-    
     updateUser : {
         url: `${backendDomain}/api/update-user`,
         method: "post"
