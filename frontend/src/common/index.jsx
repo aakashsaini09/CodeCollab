@@ -4,10 +4,6 @@ const SummaryApi = {
         url: `${backendDomain}/api/signup`,
         method: "post"
     },
-    signUpAdmin : {
-        url: `${backendDomain}/api/signup/adminloginpage`,
-        method: "post"
-    },
     signIn : {
         url: `${backendDomain}/api/login`,
         method: "post"
