@@ -20,12 +20,13 @@ const SummaryApi = {
         url: `${backendDomain}/api/all-users`,
         method: "get"
     },
+    
     updateUser : {
         url: `${backendDomain}/api/update-user`,
         method: "post"
     },
     allProducts : {
-        url: `${backendDomain}/api/update-user`,
+            url: `${backendDomain}/api/update-user`,
         method: "post"
     },
 }
