@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import UploadProduct from '../components/UploadProduct'
-
 const Allproducts = () => {
+  
   const [openUploadProduct, setopenUploadProduct] = useState(false)
   return (
     // all products listing
