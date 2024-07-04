@@ -11,7 +11,6 @@ const Header = () => {
   const dispatch = useDispatch()
   const [popUpDisplay, setPopUpDisplay] = useState(false)
   const user = useSelector(state => state.user?.user)
-
   const handleLogOut = async() =>{
     const fetchData = await fetch(SummaryApi.userLogOut.url, {
       method: SummaryApi.userLogOut.method,
@@ -19,11 +18,11 @@ const Header = () => {
     })
     const data = await fetchData.json()
     if(data.success){
-      toast.success(data.message)
-      dispatch(setUserDetails(null))
+      toast.success(data.message);
+      dispatch(setUserDetails(null));
     }
     if(data.error){
-      toast.error(data.message)
+      toast.error(data.message);
     }
 
   }
