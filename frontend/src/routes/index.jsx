@@ -40,11 +40,7 @@ const router= createBrowserRouter([
                     {
                         path : "all-products",
                         element: <AllProudcts/>
-                    },
-                    {
-                        path : "all-productsinnewform",
-                        element: <AllProudctsbutnewform/>
-                    },
+                    \
                 ]
             },
         ]
