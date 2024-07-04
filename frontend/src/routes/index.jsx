@@ -40,7 +40,7 @@ const router= createBrowserRouter([
                     {
                         path : "all-products",
                         element: <AllProudcts/>
-                    \
+                    },
                 ]
             },
         ]
