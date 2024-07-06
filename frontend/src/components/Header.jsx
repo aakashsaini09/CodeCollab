@@ -23,9 +23,7 @@ const Header = () => {
     }
     if(data.error){
       toast.error(data.message);
-    }
-
-  }
+    }}
   return (
     <>
       <nav className="bg-gray-300 border-gray-200 dark:bg-gray-900 md:px-20" >
