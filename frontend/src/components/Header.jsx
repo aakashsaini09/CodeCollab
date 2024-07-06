@@ -53,8 +53,7 @@ const Header = () => {
         <div className="text-4xl cursor-pointer" onClick={() => setPopUpDisplay((prev) => !prev)}>
           {
             user?.profilePic ? (<img src={user?.profilePic} className='h-10 w-10 flex mx-auto cursor-pointer rounded-full' alt={user?.name}></img>) : (<FaUserCircle/>)
-          }
-            
+          }  
         </div>
         )
       }
@@ -75,8 +74,7 @@ const Header = () => {
           </div>
         )}
         <div className="user text-3xl cursor-pointer">
-           { user?._id ?
-            ( <button onClick={handleLogOut} className="bg-purple-700 hover:bg-purple-600 px-3 py-1 text-white text-sm md:text-xl rounded-md flex justify-center items-center align-middle">Logout</button>)
+           { user?._id ? ( <button onClick={handleLogOut} className="bg-purple-700 hover:bg-purple-600 px-3 py-1 text-white text-sm md:text-xl rounded-md flex justify-center items-center align-middle">Logout</button>)
             : 
             (<Link to={'login'} className="bg-purple-700 hover:bg-purple-600 px-3 py-1 text-white text-sm md:text-xl rounded-md flex justify-center items-center align-middle">Login</Link>)} 
         </div>
