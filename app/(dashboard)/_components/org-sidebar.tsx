@@ -16,7 +16,7 @@ const OrgSidebar = () => {
   const searchParams = useSearchParams();
   const favorites = searchParams.get('favorites');
   return (
-    <div className='hidden lg:flex flex-col space-y-6 w-[246px] pl-16  h-[100vh] pt-5'>
+    <div className='hidden lg:flex flex-col space-y-6 w-[246px] h-[100vh] pt-5'>
       <Link href={"/"}>
       <div className="flex items-center gap-x-2">
         <Image src={'/logo.svg'} alt='logo' height={60} width={60}/>

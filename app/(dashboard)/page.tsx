@@ -2,7 +2,7 @@ import { UserButton } from "@clerk/nextjs";
 
 const DashboardPage = () => {
   return (
-    <div>
+    <div className="bg-red-500">
       Dashboard Root page
     </div>
   )

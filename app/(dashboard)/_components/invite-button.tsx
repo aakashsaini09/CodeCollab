@@ -7,8 +7,8 @@ const InviteButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
-            <Plus className='h-4 w-4 mr-2'/>
+        <Button variant="outline" size="sm" className='px-2 py-2'>
+            <Plus className='h-3 w-3 mr-2'/>
             Invite members
         </Button>
       </DialogTrigger>
