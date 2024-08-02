@@ -3,11 +3,29 @@ import qs from 'query-string'
 import { Search } from 'lucide-react';
 import {useDebounceValue} from 'usehooks-ts'
 import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
+import { useState, ChangeEvent, useEffect } from 'react';
 const SearchInput = () => {
+  const router = useRouter()
+  const [value, setvalue] = useState("")
+  const debouncedValue = useDebounceValue(value, 300)
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setvalue(e.target.value)
+  }
+  useEffect(() => {
+    const url = qs.stringifyUrl({
+      url: "/",
+      query: {
+        search: debouncedValue[0],
+      },
+    }, {skipEmptyString: true, skipNull: true})
+    router.push(url);
+  }, [debouncedValue, router])
+  
   return (
     <div className='w-full relative ml-3'>
       <Search className='absolute top-1/2 left-3 transform -translate-y-1/2 text-muted-foreground h-4 w-4'/>
-      <Input className='w-full max-w-[516px] pl-9 rounded-sm' placeholder='Search board'/>
+      <Input onChange={handleChange} value={value} className='w-full max-w-[516px] pl-9 rounded-sm' placeholder='Search board'/>
     </div>
   )
 }
