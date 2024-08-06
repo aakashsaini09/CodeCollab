@@ -13,7 +13,7 @@ const EmptyOrg = () => {
       <div className="mt-6">
         <Dialog>
         <DialogTrigger asChild>
-            <Button className='bg-black text-white hover:text-black hover:bg-white hover:border hover:border-black' size="lg">Create organization</Button>
+            <Button className='bg-black text-white hover:text-black hover:bg-white hover:border-2 hover:border-black' size="lg">Create organization</Button>
         </DialogTrigger>
         <DialogContent className='p-0 bg-transparent border-non max-w-[480px]'><CreateOrganization/></DialogContent>
         </Dialog>
