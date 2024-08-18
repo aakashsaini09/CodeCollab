@@ -1,8 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import logo from '../assets/logo.png'
 import Clients from '../components/Clients'
 import Editor from '../components/Editor'
+import { connectSocket } from '../socketIO'
+import ACTION from '../Action'
+import { useLocation } from 'react-router-dom'
 const EditorPage = () => {
+    const location = useLocation()
+    // const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap> | undefined>(null);
+    const socketRef = useRef(null);
+    useEffect(() => {
+      const init = async() =>{
+        // @ts-ignore
+        socketRef.current = await connectSocket();
+        // @ts-ignore
+        // socketRef.current.emit(ACTION.JOIN, {
+        //     roomId, 
+        //     username: location.state?.username
+        // });
+      }
+      init()
+    }, [])
     // @ts-ignore
     const [clients, setclients] = useState([
         {id: 1, username: "Aakash"},
@@ -13,6 +31,15 @@ const EditorPage = () => {
         {id: 6, username: "Daman"},
         {id: 7, username: "Yamato varma"}
     ])
+    // const [clients, setclients] = useState([
+    //     {id: 1, username: "Aakash"},
+    //     {id: 2, username: "Vinay"},
+    //     {id: 3, username: "Ankit"},
+    //     {id: 4, username: "Us"},
+    //     {id: 5, username: "Caman"},
+    //     {id: 6, username: "Daman"},
+    //     {id: 7, username: "Yamato varma"}
+    // ])
   return (
     <div className="mainWrap h-[100vh] flex">
         <div className="aside bg-zinc-800 h-[100vh] w-[17vw] flex flex-col">
