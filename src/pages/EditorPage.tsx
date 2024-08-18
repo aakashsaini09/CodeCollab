@@ -15,7 +15,6 @@ const EditorPage = () => {
     ])
   return (
     <div className="mainWrap h-[100vh] flex">
-        
         <div className="aside bg-zinc-800 h-[100vh] w-[17vw] flex flex-col">
             <div className="asideInner flex-1">
                 <div className="logo flex item-center border-b py-10 border-b-white">
