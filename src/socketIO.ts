@@ -6,6 +6,6 @@ export const connectSocket = async() => {
         timeout: 10000,
         transports: ['websocket']
     };
-    const backendUrl = process.env.BACKEND_URL || '';
+    const backendUrl = 'http://localhost:5000'
     return io(backendUrl, options);
 }

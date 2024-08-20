@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import logo from '../assets/logo.png'
 import Clients from '../components/Clients'
 import Editor from '../components/Editor'
+import toast from 'react-hot-toast'
 import { connectSocket } from '../socketIO'
 import ACTION from '../Action'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate, Navigate } from 'react-router-dom'
 const EditorPage = () => {
     const location = useLocation()
+    const ReactNavigate = useNavigate()
     // const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap> | undefined>(null);
     const socketRef = useRef(null);
     useEffect(() => {
@@ -14,10 +16,23 @@ const EditorPage = () => {
         // @ts-ignore
         socketRef.current = await connectSocket();
         // @ts-ignore
-        // socketRef.current.emit(ACTION.JOIN, {
-        //     roomId, 
-        //     username: location.state?.username
-        // });
+        socketRef.current.on('connect_error', (err: any) => handleError(err))
+        // @ts-ignore
+        socketRef.current.on('connect_failed', (err: any) => handleError(err))
+
+
+        function handleError (err: any){
+            console.log("Socket Error: ", err)
+            toast.error("Socket Connection failed, try again!");
+            ReactNavigate('/')
+        }
+
+
+        // @ts-ignore
+        socketRef.current.emit(ACTION.JOIN, {
+            // roomId, 
+            username: location.state?.username
+        });
       }
       init()
     }, [])
@@ -40,6 +55,10 @@ const EditorPage = () => {
     //     {id: 6, username: "Daman"},
     //     {id: 7, username: "Yamato varma"}
     // ])
+
+    if(!location.state){
+        return <Navigate to="/"/>
+    }
   return (
     <div className="mainWrap h-[100vh] flex">
         <div className="aside bg-zinc-800 h-[100vh] w-[17vw] flex flex-col">
