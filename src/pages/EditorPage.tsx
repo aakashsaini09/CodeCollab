@@ -5,10 +5,13 @@ import Editor from '../components/Editor'
 import toast from 'react-hot-toast'
 import { connectSocket } from '../socketIO'
 import ACTION from '../Action'
-import { useLocation, useNavigate, Navigate } from 'react-router-dom'
+import { useLocation, useNavigate, Navigate, useParams} from 'react-router-dom'
 const EditorPage = () => {
     const location = useLocation()
     const ReactNavigate = useNavigate()
+    const params = useParams();
+    console.log("params is: ", params)
+    const {roomId} = useParams();
     // const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap> | undefined>(null);
     const socketRef = useRef(null);
     useEffect(() => {
@@ -30,7 +33,7 @@ const EditorPage = () => {
 
         // @ts-ignore
         socketRef.current.emit(ACTION.JOIN, {
-            // roomId, 
+            roomId, 
             username: location.state?.username
         });
       }
