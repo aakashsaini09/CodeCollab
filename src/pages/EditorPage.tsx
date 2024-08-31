@@ -4,6 +4,7 @@ import Clients from '../components/Clients'
 import Editor from '../components/Editor'
 import toast from 'react-hot-toast'
 import { connectSocket } from '../socketIO'
+// @ts-ignore
 import Action  from '../../Action'
 import { useLocation, useNavigate, Navigate, useParams} from 'react-router-dom'
 import ACTION from '../../Action'
@@ -11,8 +12,7 @@ import { Socket } from 'socket.io-client' // Import DefaultEventsMap
 const EditorPage = () => {
     const location = useLocation()
     const ReactNavigate = useNavigate()
-    const params = useParams();
-    console.log("params is: ", params)
+    const [clients, setclients] = useState<{ id: string; username: string }[]>([])
     const {roomId} = useParams();
     const socketRef = useRef<Socket | null>(null);
     useEffect(() => {
@@ -37,28 +37,16 @@ const EditorPage = () => {
             roomId, 
             username: location.state?.username
         });
+        socketRef.current.on('joined', ({socketId, username, clients}) => {
+            if(username !== location.state?.username){
+                toast.success(`${username} joined the room.`)
+            }
+            console.log(socketId, clients)
+            setclients(clients)
+        })
       }
       init()
     }, [])
-    // @ts-ignore
-    const [clients, setclients] = useState([
-        {id: 1, username: "Aakash"},
-        {id: 2, username: "Vinay"},
-        {id: 3, username: "Ankit"},
-        {id: 4, username: "Us"},
-        {id: 5, username: "Caman"},
-        {id: 6, username: "Daman"},
-        {id: 7, username: "Yamato varma"}
-    ])
-    // const [clients, setclients] = useState([
-    //     {id: 1, username: "Aakash"},
-    //     {id: 2, username: "Vinay"},
-    //     {id: 3, username: "Ankit"},
-    //     {id: 4, username: "Us"},
-    //     {id: 5, username: "Caman"},
-    //     {id: 6, username: "Daman"},
-    //     {id: 7, username: "Yamato varma"}
-    // ])
 
     if(!location.state){
         return <Navigate to="/"/>
@@ -83,7 +71,7 @@ const EditorPage = () => {
                 <button className='w-3/4 px-4 rounded-md font-bold text-center hover:bg-[#32bc67] py-2 bg-[#4aed88] my-3 text-black'>Leave</button>
             </div>
         </div>
-        <div className="editorWrap bg-gray-900 w-full">
+        <div className="editorWrap bg-gray-900 w-full min-h-[100vh]">
             <Editor/>
         </div>
     </div>

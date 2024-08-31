@@ -6,7 +6,8 @@ import { Toaster } from 'react-hot-toast'
 function App() {
 
   return (
-    <>  
+    <> 
+    <div className='min-h-[100vh] bg-gray-900'>
     <div>
       <Toaster 
       position='top-right'
@@ -19,6 +20,7 @@ function App() {
       <Route path='/editor/:id' element={<EditorPage/>}/>
     </Routes>
     </BrowserRouter>
+    </div> 
     </>
   )
 }
