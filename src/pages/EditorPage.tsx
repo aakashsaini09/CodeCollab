@@ -4,24 +4,25 @@ import Clients from '../components/Clients'
 import Editor from '../components/Editor'
 import toast from 'react-hot-toast'
 import { connectSocket } from '../socketIO'
-import ACTION from '../Action'
+import Action  from '../../Action'
 import { useLocation, useNavigate, Navigate, useParams} from 'react-router-dom'
+import ACTION from '../../Action'
+import { Socket } from 'socket.io-client' // Import DefaultEventsMap
 const EditorPage = () => {
     const location = useLocation()
     const ReactNavigate = useNavigate()
     const params = useParams();
     console.log("params is: ", params)
     const {roomId} = useParams();
-    // const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap> | undefined>(null);
-    const socketRef = useRef(null);
+    const socketRef = useRef<Socket | null>(null);
     useEffect(() => {
       const init = async() =>{
-        // @ts-ignore
         socketRef.current = await connectSocket();
         // @ts-ignore
         socketRef.current.on('connect_error', (err: any) => handleError(err))
         // @ts-ignore
         socketRef.current.on('connect_failed', (err: any) => handleError(err))
+
 
 
         function handleError (err: any){

@@ -8,7 +8,6 @@ import '../App.css'
 import 'codemirror/theme/monokai.css';
 const Editor = () => {
     useEffect(() => {
-      console.log("loaded!")
         async function init() {
         CodeMirror.fromTextArea(document.getElementById("editor") as HTMLTextAreaElement, {
             mode: {name: 'javascript', json: true},
