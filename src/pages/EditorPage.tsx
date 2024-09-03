@@ -8,12 +8,13 @@ import { connectSocket } from '../socketIO'
 import Action  from '../../Action'
 import { useLocation, useNavigate, Navigate, useParams} from 'react-router-dom'
 import ACTION from '../../Action'
-import { Socket } from 'socket.io-client' // Import DefaultEventsMap
+import { Socket } from 'socket.io-client' 
 const EditorPage = () => {
     const location = useLocation()
     const ReactNavigate = useNavigate()
     const [clients, setclients] = useState<{ id: string; username: string }[]>([])
-    const {roomId} = useParams();
+    const {id} = useParams();
+    const roomId = id;
     const socketRef = useRef<Socket | null>(null);
     useEffect(() => {
       const init = async() =>{
@@ -57,18 +58,31 @@ const EditorPage = () => {
       }
       init()
       return () => {
-        socketRef.current?.disconnect
+        socketRef.current?.disconnect();
         // @ts-ignore
         socketRef.current.off('joined')
         // @ts-ignore
-        socketRef.current.off('disconnected')
+        socketRef.current.off('disconnected'    )
 
       }
     }, [])
-
+    async function copyFunction() {
+        console.log("roomId is:", roomId)
+        try {
+            await navigator.clipboard.writeText(roomId || "Not found")
+            toast.success("Room ID copied to clipboard")
+        } catch (err) {
+            console.log("error while copying to clipboard", err)
+            toast.error("Error while copying to clipboard")
+        }
+    }
+    function leaveRoom(){
+        ReactNavigate('/')
+    }
     if(!location.state){
         return <Navigate to="/"/>
     }
+    
   return (
     <div className="mainWrap h-[100vh] flex">
         <div className="aside bg-zinc-800 h-[100vh] w-[17vw] flex flex-col">
@@ -85,8 +99,8 @@ const EditorPage = () => {
                 </div>
             </div>
             <div className='w-full flex flex-col justify-center items-center'>
-                <button className='w-3/4 px-4 rounded-md font-bold text-center hover:bg-gray-200 py-2 bg-white my-3 text-black'>Copy Room ID</button>
-                <button className='w-3/4 px-4 rounded-md font-bold text-center hover:bg-[#32bc67] py-2 bg-[#4aed88] my-3 text-black'>Leave</button>
+                <button className='w-3/4 px-4 rounded-md font-bold text-center hover:bg-gray-200 py-2 bg-white my-3 text-black' onClick={copyFunction}>Copy Room ID</button>
+                <button className='w-3/4 px-4 rounded-md font-bold text-center hover:bg-[#32bc67] py-2 bg-[#4aed88] my-3 text-black' onClick={leaveRoom}>Leave</button>
             </div>
         </div>
         <div className="editorWrap bg-gray-900 w-full min-h-[100vh]">

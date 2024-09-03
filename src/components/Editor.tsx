@@ -18,6 +18,7 @@ const Editor = ({socketRef, roomId}:any) => {
             autoCloseBrackets: true,
             lineNumbers: true,
         });
+       
         // @ts-ignore
         editorRef.current.on('change', (instance, changes) => {
           const { origin } = changes;
@@ -28,15 +29,24 @@ const Editor = ({socketRef, roomId}:any) => {
             })
           }
         })
+      
+        // editorRef.current.setValue(`// Welcome to CodeShare\n// Share code with your friends\n// Start coding now!\nconst mainFunction = () => {\n  console.log('Hello World!'); \n}\n mainFunction();`)
+      }
+      init()
+      return()=>{
+        socketRef.current?.off('code-change')
+      }
+    }, [])
+    useEffect(() => {
+      if(socketRef.current){
         socketRef.current.on('code-change', ({code}: any) => {
           if(code !== null) {
             editorRef.current?.setValue(code)
           }
         })
-        // editorRef.current.setValue(`// Welcome to CodeShare\n// Share code with your friends\n// Start coding now!\nconst mainFunction = () => {\n  console.log('Hello World!'); \n}\n mainFunction();`)
       }
-      init()
-    }, [])
+    }, [socketRef.current])
+    
     
   return (
     <div className="h-full"> 
