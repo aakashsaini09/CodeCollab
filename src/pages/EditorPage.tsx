@@ -12,6 +12,7 @@ import { Socket } from 'socket.io-client'
 const EditorPage = () => {
     const location = useLocation()
     const ReactNavigate = useNavigate()
+    const codeRef = useRef<HTMLTextAreaElement | null>(null)
     const [clients, setclients] = useState<{ id: string; username: string }[]>([])
     const {id} = useParams();
     const roomId = id;
@@ -45,12 +46,16 @@ const EditorPage = () => {
             }
             // console.log(socketId, clients)
             setclients(clients)
+            socketRef.current?.emit('sync-code', {
+                code: codeRef.current,
+                socketId
+            })
         })
         // listening for disconnected user
         socketRef.current.on('disconnected', ({username, socketId}) => {
             toast.success(`${username} left the room.`)
             setclients((prev) => {
-                // **************************************client.id ^^client.socketId****************************
+                // **************************************client.id ^^ client.socketId****************************
                 return prev.filter((client) => client.id !== socketId)
             })
 
@@ -87,12 +92,12 @@ const EditorPage = () => {
     <div className="mainWrap h-[100vh] flex">
         <div className="aside bg-zinc-800 h-[100vh] w-[17vw] flex flex-col">
             <div className="asideInner flex-1">
-                <div className="logo flex item-center border-b py-10 border-b-white">
-                    <img src={logo} className='h-24' alt="" />
-                    <h2 className='font-extrabold text-3xl text-gray-200 my-auto'>CodeCollab</h2>
+                <div className="logo flex flex-col item-center border-b py-4 border-b-white">
+                    <img src={logo} className='h-20 mx-auto' alt="" />
+                    <h2 className='font-extrabold text-3xl text-gray-200 m-auto'>CodeCollab</h2>
                 </div>
-                <h3 className='w-full text-center text-white font-bold text-xl mt-3'>Connected</h3>
-                <div className="clientList flex flex-wrap items-center gap-5 mx-auto">
+                <h3 className='w-full text-center text-white font-bold text-xl mt-3 pb-3'>Connected</h3>
+                <div className="clientList flex flex-wrap items-center gap-5 mx-auto justify-center">
                     {clients.map((user) => (
                         <Clients key={user.id} username={user.username}/>
                     ))}
@@ -104,7 +109,9 @@ const EditorPage = () => {
             </div>
         </div>
         <div className="editorWrap bg-gray-900 w-full min-h-[100vh]">
-            <Editor socketRef={socketRef} roomId={roomId}/>
+            <Editor onCodeChange={(code:any) => {
+                codeRef.current = code;
+            }} socketRef={socketRef} roomId={roomId}/>
         </div>
     </div>
   )

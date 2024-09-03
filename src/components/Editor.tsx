@@ -6,7 +6,7 @@ import 'codemirror/addon/edit/closetag';
 import 'codemirror/addon/edit/closebrackets';
 import '../App.css'
 import 'codemirror/theme/monokai.css';
-const Editor = ({socketRef, roomId}:any) => {
+const Editor = ({socketRef, roomId, onCodeChange}:any) => {
   const editorRef = useRef<CodeMirror.EditorFromTextArea | null>(null)
     useEffect(() => {
         async function init() {
@@ -23,6 +23,7 @@ const Editor = ({socketRef, roomId}:any) => {
         editorRef.current.on('change', (instance, changes) => {
           const { origin } = changes;
           const code = instance.getValue();
+          onCodeChange(code)
           if(origin !== 'setValue'){
             socketRef.current?.emit('code-change', {
               roomId, code
