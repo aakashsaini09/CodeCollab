@@ -4,7 +4,10 @@ import express from 'express'
 const app = express()
 const server = http.createServer(app);
 const io = new Server(server);
-
+app.use(express.static('dist'));
+app.use((req, res, next) => {
+    res.sendFile(__dirname, 'dist', 'index.html');
+})
 function getRoomClients(roomId) {
     return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map((socketId)=> {
         return {
