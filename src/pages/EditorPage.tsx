@@ -37,15 +37,33 @@ const EditorPage = () => {
             roomId, 
             username: location.state?.username
         });
+        // @ts-ignore
         socketRef.current.on('joined', ({socketId, username, clients}) => {
             if(username !== location.state?.username){
                 toast.success(`${username} joined the room.`)
             }
-            console.log(socketId, clients)
+            // console.log(socketId, clients)
             setclients(clients)
+        })
+        // listening for disconnected user
+        socketRef.current.on('disconnected', ({username, socketId}) => {
+            toast.success(`${username} left the room.`)
+            setclients((prev) => {
+                // **************************************client.id ^^client.socketId****************************
+                return prev.filter((client) => client.id !== socketId)
+            })
+
         })
       }
       init()
+      return () => {
+        socketRef.current?.disconnect
+        // @ts-ignore
+        socketRef.current.off('joined')
+        // @ts-ignore
+        socketRef.current.off('disconnected')
+
+      }
     }, [])
 
     if(!location.state){
@@ -72,7 +90,7 @@ const EditorPage = () => {
             </div>
         </div>
         <div className="editorWrap bg-gray-900 w-full min-h-[100vh]">
-            <Editor/>
+            <Editor socketRef={socketRef} roomId={roomId}/>
         </div>
     </div>
   )
