@@ -6,6 +6,6 @@ export const connectSocket = async() => {
         timeout: 10000,
         transports: ['websocket']
     };
-    const backendUrl = 'http://localhost:5000';
+    const backendUrl = 'https://codingbuddies-r9sf.onrender.com';
     return io(backendUrl, options); 
 }
