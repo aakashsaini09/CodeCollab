@@ -5,3 +5,15 @@
   margin: 0;
   padding: 0;
 }
+
+
+/* // "scripts": {
+  //   "dev:front": "vite",
+  //   "dev": "npm run server:prod",
+  //   "start": "npm run build && npm run server:prod",
+  //   "build": "tsc -b && vite build",
+  //   "server:dev": "nodemon server.js",
+  //   "server:prod": "node server.js",
+  //   "lint": "eslint .",
+  //   "preview": "vite preview"
+  // }, */

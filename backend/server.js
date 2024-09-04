@@ -1,13 +1,16 @@
-import { Server } from 'socket.io'
-import http, { get } from 'http'
-import express from 'express'
+// import { Server } from 'socket.io'
+// import http, { get } from 'http'
+// import express from 'express'
+const { Server } = require('socket.io');
+const http = require('http');
+const express = require('express');
 const app = express()
 const server = http.createServer(app);
 const io = new Server(server);
-app.use(express.static('dist'));
-app.use((req, res, next) => {
-    res.sendFile(__dirname, 'dist', 'index.html');
-})
+// app.use(express.static('dist'));
+// app.use((req, res, next) => {
+//     res.sendFile(__dirname, 'dist', 'index.html');
+// })
 function getRoomClients(roomId) {
     return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map((socketId)=> {
         return {

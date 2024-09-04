@@ -94,7 +94,7 @@ const EditorPage = () => {
             <div className="asideInner flex-1">
                 <div className="logo flex flex-col item-center border-b py-4 border-b-white">
                     <img src={logo} className='h-20 mx-auto' alt="" />
-                    <h2 className='font-extrabold text-3xl text-gray-200 m-auto'>CodeCollab</h2>
+                    <h2 className='font-extrabold text-3xl text-gray-200 m-auto'>CodeBuddies</h2>
                 </div>
                 <h3 className='w-full text-center text-white font-bold text-xl mt-3 pb-3'>Connected</h3>
                 <div className="clientList flex flex-wrap items-center gap-5 mx-auto justify-center">

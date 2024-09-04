@@ -35,7 +35,7 @@ const Home = () => {
 
         <div className="logo flex item-center w-full pl-6 min-h-[25%] mt-3">
             <img src={logo} className='h-24 border-r px-5 border-purple-600' alt="" />
-            <h2 className='font-extrabold text-4xl text-gray-200 my-auto ml-5'>CodeCollab</h2>
+            <h2 className='font-extrabold text-4xl text-gray-200 my-auto ml-5'>CodingBuddies</h2>
         </div>
 
         <div className="head font-bold text-white text-lg mt-8 ml-6">Paste Invitation Room ID</div>
